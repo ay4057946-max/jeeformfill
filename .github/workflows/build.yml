@@ -1,8 +1,5 @@
 name: Build APK from ZIP
 
-# Put your project .zip (e.g. JEEGuide-Project.zip) in the ROOT of the repo,
-# and save this file as .github/workflows/build.yml. No need to unzip anything.
-
 on:
   push:
     branches: [ main, master ]
@@ -42,8 +39,8 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Accept Android SDK licenses
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - name: Set up Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
